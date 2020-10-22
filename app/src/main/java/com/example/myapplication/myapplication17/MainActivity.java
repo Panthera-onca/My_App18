@@ -24,10 +24,12 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         PersonneDAO dao = new PersonneDAO(this);
-        List<Personne> personne = dao.get();
+        Personne personne = new Personne(1, "Jira", "Go");
+        dao.update(personne);
+        List<Personne> personnes = dao.get();
         long id = dao.insert((Personne) personne);
-        for (Personne item : personne){
-            Log.i(TAG, "Id de l'insertion:" + id);
+        for (Personne item : personnes){
+            Log.i(TAG, item.toString());
         }
     }
 }
