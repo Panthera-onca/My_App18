@@ -8,6 +8,8 @@ import android.util.Log;
 import com.example.myapplication.myapplication17.bo.Personne;
 import com.example.myapplication.myapplication17.dao.PersonneDAO;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "ACOS";
 
@@ -21,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Personne personne = new Personne("Anthony", "Cosson");
-
         PersonneDAO dao = new PersonneDAO(this);
-        long id = dao.insert(personne);
-        Log.i(TAG, "Id de l'insertion:" + id);
+        List<Personne> personne = dao.get();
+        long id = dao.insert((Personne) personne);
+        for (Personne item : personne){
+            Log.i(TAG, "Id de l'insertion:" + id);
+        }
     }
 }
